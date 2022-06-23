@@ -1,0 +1,73 @@
+﻿@model AplicacionWeb.Models.Jugadores
+@using System.ComponentModel.DataAnnotations;
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar Jugador</h2>
+
+@using (Html.BeginForm("Editar", "Jugadores", FormMethod.Post, new { @id = "frmEditar" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>Jugador:</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAtrributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.lastName, new { htmlAtrributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.team, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.team, new { htmlAtrributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.position, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.position, new { htmlAtrributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+    </div>
+    <script>
+        var frmEditar = document.getElementById("frmEditar");
+        frmEditar.onsubmit = function (e) {
+            e.preventDefault();
+            if (confirm("Desea GUARDAR los cambios") == 1) {
+                frmEditar.submit();
+
+            }
+        }
+
+
+    </script>
+}
+

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<AplicacionWeb.Models.JugadoresCLS>
+
+@{
+    ViewBag.Title = "Lista_jugadores_linq";
+}
+
+<h2>Lista_jugadores_linq</h2>
+
+    @using (Html.BeginForm("generarPDF", "Jugadores"))
+    {
+        <button id="submitButton" type="submit">Importar Pdf</button>
+    }
+
+    @using (Html.BeginForm())
+            {
+                <p> Title : @Html.TextBox("ojugadoresCLS.lastName") <br />
+                <input type="submit" value="Filter" /></p>
+            }
+
+
+<p>
+   @Html.ActionLink("Agregar Jugador ", "Agregar_Jugador_Por_Clase", new { miAtributo = "valor1", @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.team)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.position)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.position)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Editar", new { id = item.id }, new { @class = "glyphicon glyphicon-edit btn btn-primary" }) |
+                @Html.ActionLink(" ", "DetalleJugador", new { id = item.id }, new { @class = "glyphicon glyphicon-eye-open btn btn-primary" }) |
+                @Html.ActionLink(" ", "delete", new { id = item.id }, new { @class = "glyphicon glyphicon-trash btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+    function eliminar() {
+        if (confirm("¿desea eliminar el registro?") == 1) {
+            alert("Se elimino correctamente");
+        }
+        else {
+            event.preventDefault
+        }
+    }
+</script>
